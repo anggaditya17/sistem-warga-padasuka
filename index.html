@@ -3,48 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi Warga - RW 03 Padasuka</title>
+    <title>RW 03 Padasuka | Sistem Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+        }
+        .apple-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .tab-active {
+            color: #0071e3;
+            border-bottom: 2px solid #0071e3;
+        }
+        .hidden-form { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-between py-10 px-4">
 
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="w-full max-w-4xl text-center mb-10">
+        <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+             alt="Community" 
+             class="w-full h-48 object-cover rounded-3xl mb-8 shadow-sm">
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">RW 03 Padasuka</h1>
+        <p class="text-gray-500 mt-3 text-lg">Sistem Informasi Warga Digital</p>
+    </div>
+
+    <div class="max-w-[400px] w-full apple-glass rounded-[2rem] shadow-2xl overflow-hidden transition-all duration-500">
         
-        <div class="p-8 text-center bg-blue-600">
-            <div class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-md">
-                <span class="text-blue-600 font-bold text-xl">RW 03</span>
-            </div>
-            <h1 class="text-white text-2xl font-bold">RW 03 Padasuka</h1>
-            <p class="text-blue-100 text-sm">Sistem Informasi Warga Digital</p>
+        <div class="flex border-b border-gray-200">
+            <button onclick="switchTab('warga')" id="btn-warga" class="flex-1 py-4 text-sm font-medium tab-active transition-all">Warga</button>
+            <button onclick="switchTab('singgah')" id="btn-singgah" class="flex-1 py-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-all">Singgah</button>
+            <button onclick="switchTab('mitra')" id="btn-mitra" class="flex-1 py-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-all">Mitra</button>
         </div>
 
         <div class="p-8">
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2">Nomor WhatsApp</label>
-                <input type="text" placeholder="Contoh: 08123456xxx" 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-                <p class="text-xs text-gray-500 mt-1 italic">* Gunakan nomor yang terdaftar di data warga</p>
+            <div id="form-warga">
+                <div id="wa-section">
+                    <h2 class="text-2xl font-semibold mb-6">Selamat Datang.</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[12px] font-medium text-gray-400 uppercase tracking-wider mb-1 ml-1">Nomor WhatsApp</label>
+                            <input type="text" placeholder="0812..." 
+                                class="w-full px-4 py-3 bg-[#f5f5f7] border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-gray-400">
+                        </div>
+                        <button class="w-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium py-3 rounded-xl shadow-md transition-all active:scale-[0.98]">
+                            Kirim OTP
+                        </button>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button onclick="toggleWargaMethod('kk')" class="text-sm text-blue-600 hover:underline">Masuk dengan Nomor KK</button>
+                    </div>
+                </div>
+
+                <div id="kk-section" class="hidden-form">
+                    <h2 class="text-2xl font-semibold mb-6">Akses Nomor KK</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[12px] font-medium text-gray-400 uppercase tracking-wider mb-1 ml-1">Nomor Kartu Keluarga</label>
+                            <input type="text" placeholder="3277..." 
+                                class="w-full px-4 py-3 bg-[#f5f5f7] border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                        </div>
+                        <button class="w-full bg-black text-white font-medium py-3 rounded-xl shadow-md transition-all active:scale-[0.98]">
+                            Verifikasi Data
+                        </button>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button onclick="toggleWargaMethod('wa')" class="text-sm text-blue-600 hover:underline">Kembali ke WhatsApp</button>
+                    </div>
+                </div>
             </div>
 
-            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-300 shadow-lg">
-                Kirim OTP
-            </button>
+            <div id="form-singgah" class="hidden-form text-center py-10">
+                <h3 class="text-xl font-medium">Layanan Warga Singgah</h3>
+                <p class="text-gray-500 mt-2 text-sm text-balance">Silakan hubungi pengurus RT setempat untuk pelaporan warga singgah atau tamu 24 jam.</p>
+            </div>
 
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">Belum terdaftar? 
-                    <a href="#" class="text-blue-600 font-semibold hover:underline">Gunakan Nomor KK</a>
-                </p>
+            <div id="form-mitra" class="hidden-form text-center py-10">
+                <h3 class="text-xl font-medium">Kemitraan RW</h3>
+                <p class="text-gray-500 mt-2 text-sm">Akses khusus untuk mitra keamanan dan kebersihan wilayah.</p>
             </div>
         </div>
     </div>
 
-    <footer class="mt-8 text-center text-gray-500 text-sm">
+    <footer class="text-gray-400 text-[13px] mt-10 space-y-2 text-center">
+        <p>Copyright &copy; 2026 RW 03 Padasuka Digital.</p>
         <p>Kecamatan Cimahi Tengah, Kota Cimahi</p>
     </footer>
 
+    <script>
+        function switchTab(tab) {
+            const forms = ['form-warga', 'form-singgah', 'form-mitra'];
+            const buttons = ['btn-warga', 'btn-singgah', 'btn-mitra'];
+            
+            forms.forEach(f => document.getElementById(f).classList.add('hidden-form'));
+            buttons.forEach(b => document.getElementById(b).classList.remove('tab-active', 'text-gray-600'));
+            buttons.forEach(b => document.getElementById(b).classList.add('text-gray-400'));
+
+            document.getElementById('form-' + tab).classList.remove('hidden-form');
+            document.getElementById('btn-' + tab).classList.add('tab-active');
+            document.getElementById('btn-' + tab).classList.remove('text-gray-400');
+        }
+
+        function toggleWargaMethod(method) {
+            if(method === 'kk') {
+                document.getElementById('wa-section').classList.add('hidden-form');
+                document.getElementById('kk-section').classList.remove('hidden-form');
+            } else {
+                document.getElementById('wa-section').classList.remove('hidden-form');
+                document.getElementById('kk-section').classList.add('hidden-form');
+            }
+        }
+    </script>
 </body>
 </html>
