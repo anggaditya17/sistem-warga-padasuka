@@ -3,114 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RW 03 Padasuka | Digital System</title>
+<title>RW 03 Padasuka | Super App</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #eef2f7, #f8fafc);
-}
-.glass {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255,255,255,0.3);
-}
-.fade-in {
-  animation: fadeIn 0.6s ease;
-}
-@keyframes fadeIn {
-  from {opacity:0; transform: translateY(10px);} 
-  to {opacity:1; transform: translateY(0);} 
-}
+body { font-family: 'Inter', sans-serif; background:#f6f7fb; }
+.card { background:white; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
 </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center px-4">
+<body class="min-h-screen">
 
-<div class="w-full max-w-5xl">
+<!-- HEADER -->
+<div class="bg-green-600 text-white px-6 pt-8 pb-10 rounded-b-[30px] shadow-lg">
+  <h1 class="text-2xl font-semibold">Halo, Warga 👋</h1>
+  <p class="text-sm opacity-90">RW 03 Padasuka Digital System</p>
 
-<!-- HERO -->
-<div class="relative rounded-3xl overflow-hidden shadow-xl mb-8">
-  <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg" class="w-full h-56 object-cover">
-  <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white text-center px-4">
-    <h1 class="text-4xl md:text-5xl font-semibold">RW 03 Padasuka</h1>
-    <p class="mt-2 text-sm md:text-lg opacity-90">Smart Living • Digital Community</p>
+  <!-- SEARCH -->
+  <div class="mt-4">
+    <input type="text" placeholder="Cari layanan..." class="w-full px-4 py-3 rounded-xl text-black outline-none">
   </div>
 </div>
 
-<!-- CARD -->
-<div class="glass rounded-3xl shadow-2xl overflow-hidden">
+<!-- MAIN -->
+<div class="px-4 -mt-8 space-y-6">
 
-<!-- TAB -->
-<div class="flex text-sm font-medium">
-  <button onclick="switchTab('warga')" id="btn-warga" class="flex-1 py-4 border-b-2 border-blue-500 text-blue-600">Warga</button>
-  <button onclick="switchTab('singgah')" id="btn-singgah" class="flex-1 py-4 text-gray-400">Singgah</button>
-  <button onclick="switchTab('mitra')" id="btn-mitra" class="flex-1 py-4 text-gray-400">Mitra</button>
+<!-- QUICK ACTION -->
+<div class="card p-4">
+  <div class="grid grid-cols-4 gap-4 text-center text-sm">
+    <div>
+      <div class="bg-green-100 text-green-600 p-3 rounded-xl">🏠</div>
+      <p class="mt-2">Data Warga</p>
+    </div>
+    <div>
+      <div class="bg-blue-100 text-blue-600 p-3 rounded-xl">💳</div>
+      <p class="mt-2">Iuran</p>
+    </div>
+    <div>
+      <div class="bg-yellow-100 text-yellow-600 p-3 rounded-xl">📢</div>
+      <p class="mt-2">Info RW</p>
+    </div>
+    <div>
+      <div class="bg-red-100 text-red-600 p-3 rounded-xl">🚨</div>
+      <p class="mt-2">Lapor</p>
+    </div>
+  </div>
 </div>
 
-<!-- CONTENT -->
-<div class="p-8">
+<!-- LOGIN CARD -->
+<div class="card p-6">
+  <h2 class="text-xl font-semibold mb-4">Masuk ke Sistem</h2>
 
-<!-- WARGA -->
-<div id="form-warga" class="fade-in">
+  <div class="space-y-3">
+    <input type="text" placeholder="Nomor WhatsApp" class="w-full px-4 py-3 rounded-xl bg-gray-100 outline-none">
+    <button class="w-full bg-green-600 text-white py-3 rounded-xl font-medium">Kirim OTP</button>
+  </div>
 
-<h2 class="text-2xl font-semibold mb-6">Login Warga</h2>
+  <div class="mt-4 text-center">
+    <button onclick="toggleKK()" class="text-sm text-green-600">Gunakan Nomor KK</button>
+  </div>
 
-<div class="space-y-4">
-  <input type="text" placeholder="Nomor WhatsApp" class="w-full px-4 py-3 rounded-xl bg-gray-100 focus:ring-2 focus:ring-blue-500 outline-none">
-  <button class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 rounded-xl font-medium hover:scale-[1.02] transition">Kirim OTP</button>
+  <div id="kkBox" class="hidden mt-4">
+    <input type="text" placeholder="Nomor KK" class="w-full px-4 py-3 rounded-xl bg-gray-100">
+    <button class="w-full mt-3 bg-black text-white py-3 rounded-xl">Verifikasi</button>
+  </div>
 </div>
 
-<div class="mt-6 text-center">
-  <button onclick="toggleMethod()" class="text-sm text-blue-600">Gunakan Nomor KK</button>
-</div>
-
-<div id="kk-box" class="hidden mt-6">
-  <input type="text" placeholder="Nomor KK" class="w-full px-4 py-3 rounded-xl bg-gray-100">
-  <button class="w-full mt-3 bg-black text-white py-3 rounded-xl">Verifikasi</button>
-</div>
-
-</div>
-
-<!-- SINGGAH -->
-<div id="form-singgah" class="hidden text-center fade-in">
-  <h3 class="text-xl font-semibold">Layanan Warga Singgah</h3>
-  <p class="text-gray-500 mt-2">Silakan hubungi RT setempat untuk pelaporan tamu.</p>
-</div>
-
-<!-- MITRA -->
-<div id="form-mitra" class="hidden text-center fade-in">
-  <h3 class="text-xl font-semibold">Portal Mitra</h3>
-  <p class="text-gray-500 mt-2">Akses untuk keamanan & kebersihan wilayah.</p>
+<!-- INFO CARD -->
+<div class="card p-4">
+  <h3 class="font-semibold mb-2">Pengumuman Terbaru</h3>
+  <p class="text-sm text-gray-500">Kerja bakti hari Minggu pukul 07.00 WIB. Wajib hadir.</p>
 </div>
 
 </div>
-</div>
 
-<!-- FOOTER -->
-<div class="text-center text-gray-400 text-sm mt-6">
-  © 2026 RW 03 Padasuka • Kota Tangerang
-</div>
-
+<!-- BOTTOM NAV -->
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t py-3 px-6 flex justify-between text-xs">
+  <div class="text-green-600">🏠<br>Home</div>
+  <div>📋<br>Layanan</div>
+  <div>🔔<br>Notif</div>
+  <div>👤<br>Akun</div>
 </div>
 
 <script>
-function switchTab(tab) {
-  const forms = ['warga','singgah','mitra'];
-  forms.forEach(f => {
-    document.getElementById('form-'+f).classList.add('hidden');
-    document.getElementById('btn-'+f).classList.remove('text-blue-600','border-blue-500');
-    document.getElementById('btn-'+f).classList.add('text-gray-400');
-  });
-
-  document.getElementById('form-'+tab).classList.remove('hidden');
-  document.getElementById('btn-'+tab).classList.add('text-blue-600','border-b-2','border-blue-500');
-}
-
-function toggleMethod(){
-  document.getElementById('kk-box').classList.toggle('hidden');
+function toggleKK(){
+  document.getElementById('kkBox').classList.toggle('hidden');
 }
 </script>
 
